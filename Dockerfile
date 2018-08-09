@@ -6,6 +6,8 @@ ENV DOCKERBUILD_HUGO_VERSION="0.40.3"
 RUN : 'Install packages' \
       && apt update \
       && apt install -y --no-install-recommends ca-certificates openssh-client curl git python3-pip nodejs npm \
+      && : 'Re-hash pip' \
+      && hash -r pip3 \
       && : 'Install AWS CLI' \
       && pip3 install --upgrade pip && pip3 install setuptools && pip3 install awscli \
       && : 'Install Firebase CLI' \
