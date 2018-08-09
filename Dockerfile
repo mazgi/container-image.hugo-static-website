@@ -5,11 +5,11 @@ ENV DOCKERBUILD_HUGO_VERSION="0.40.3"
 
 RUN : 'Install packages' \
       && apt update \
-      && apt install -y --no-install-recommends ca-certificates openssh-client curl git python3-pip nodejs npm \
-      && : 'Re-hash pip' \
-      && hash -r pip3 \
+      && apt install -y --no-install-recommends ca-certificates openssh-client curl git python3-pip python3-sphinx nodejs npm \
+      && : 'Upgrade pip' \
+      && pip3 install --upgrade pip && hash -r pip3 && pip3 install setuptools \
       && : 'Install AWS CLI' \
-      && pip3 install --upgrade pip && pip3 install setuptools && pip3 install awscli \
+      && pip3 install awscli \
       && : 'Install Firebase CLI' \
       && npm install -g firebase-tools \
       && : 'Download and install Hugo' \
