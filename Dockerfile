@@ -1,7 +1,8 @@
-FROM ubuntu:16.04@sha256:e348fbbea0e0a0e73ab0370de151e7800684445c509d46195aef73e090a49bd6
+FROM ubuntu:18.04@sha256:de774a3145f7ca4f0bd144c7d4ffb2931e06634f11529653b23eba85aef8e378
 MAINTAINER "Hidenori MATSUKI <matsuki.hidenori+docker@gmail.com>"
 
 ENV DOCKERBUILD_HUGO_VERSION="0.48"
+ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN : 'Install packages' \
       && apt update \
