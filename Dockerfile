@@ -1,11 +1,11 @@
 FROM ubuntu:16.04@sha256:e348fbbea0e0a0e73ab0370de151e7800684445c509d46195aef73e090a49bd6
 MAINTAINER "Hidenori MATSUKI <matsuki.hidenori+docker@gmail.com>"
 
-ENV DOCKERBUILD_HUGO_VERSION="0.40.3"
+ENV DOCKERBUILD_HUGO_VERSION="0.48"
 
 RUN : 'Install packages' \
       && apt update \
-      && apt install -y --no-install-recommends ca-certificates openssh-client curl git python3-pip python3-sphinx nodejs npm \
+      && apt install -y --no-install-recommends ca-certificates openssh-client curl git jq python3-pip python3-sphinx nodejs npm \
       && : 'Upgrade pip' \
       && pip3 install --upgrade pip && hash -r pip3 && pip3 install setuptools \
       && : 'Install AWS CLI' \
