@@ -21,5 +21,3 @@ RUN : 'Install packages' \
       && ssh-keyscan github.com 2> /dev/null >> ~/.ssh/known_hosts \
       && : 'Clean up' \
       && apt clean
-
-ENTRYPOINT ["/bin/bash"]
