@@ -15,7 +15,7 @@ RUN : 'Install packages' \
       && npm install -g firebase-tools \
       && : 'Download and install Hugo' \
       && curl -LO "https://github.com/gohugoio/hugo/releases/download/v${DOCKERBUILD_HUGO_VERSION}/hugo_extended_${DOCKERBUILD_HUGO_VERSION}_Linux-64bit.deb" \
-      && dpkg -i hugo_${DOCKERBUILD_HUGO_VERSION}_Linux-64bit.deb \
+      && dpkg -i hugo_extended_${DOCKERBUILD_HUGO_VERSION}_Linux-64bit.deb \
       && : 'Scan ssh keys for GitHub' \
       && mkdir -p ~/.ssh/ \
       && ssh-keyscan github.com 2> /dev/null >> ~/.ssh/known_hosts \
