@@ -9,5 +9,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       run: docker build Dockerfile.d/ --tag docker.pkg.github.com/mazgi/docker.hugo-static-website/hugo-static-website:latest
+    - name: Login to package registry
+      run: docker login docker.pkg.github.com -u mazgi -p $GITHUB_TOKEN_TO_PUSH_TO_PACKAGE_REGISTRY
     - name: Push the image
       run: docker push docker.pkg.github.com/mazgi/docker.hugo-static-website/hugo-static-website:latest
