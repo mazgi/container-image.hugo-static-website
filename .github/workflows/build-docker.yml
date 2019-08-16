@@ -18,7 +18,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_TO_PUSH_TO_PACKAGE_REGISTRY }}
     - name: Push the image
-      run: docker push docker.pkg.github.com/mazgi/docker.hugo-static-website/hugo-static-website:${TAG-latest}
+      run: docker push docker.pkg.github.com/mazgi/docker.hugo-static-website/hugo-static-website:${TAG:-latest}
       env:
         TAG: ${{ github.tag }}
       if: contains(github.ref, 'master')
