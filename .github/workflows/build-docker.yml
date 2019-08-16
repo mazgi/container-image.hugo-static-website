@@ -12,6 +12,6 @@ jobs:
     - name: Login to package registry
       run: docker login docker.pkg.github.com -u mazgi -p $GITHUB_TOKEN
       env:
-        - GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Push the image
       run: docker push docker.pkg.github.com/mazgi/docker.hugo-static-website/hugo-static-website:latest
