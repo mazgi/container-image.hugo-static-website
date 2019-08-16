@@ -11,6 +11,7 @@ jobs:
       run: echo $BASE_REF
       env:
         BASE_REF: ${{ github.ref }}
+        TAG: ${{ github.tag }}
     - name: Build the Docker image
       run: docker build Dockerfile.d/ --tag docker.pkg.github.com/mazgi/docker.hugo-static-website/hugo-static-website:latest
     - name: Login to package registry
