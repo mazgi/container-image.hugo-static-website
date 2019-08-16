@@ -7,16 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: check github.base_ref
-      run: echo $BASE_REF
-      env:
-        BASE_REF: ${{ github.ref }}
-        TAG: ${{ github.tag }}
     - name: Build the Docker image
-      run: docker build Dockerfile.d/ --tag docker.pkg.github.com/mazgi/docker.hugo-static-website/hugo-static-website:latest
+      run: docker build Dockerfile.d/ --tag docker.pkg.github.com/mazgi/docker.hugo-static-website/hugo-static-website:${TAG:-latest}
+      env:
+        TAG: ${{ github.tag }}
     - name: Login to package registry
       run: docker login docker.pkg.github.com -u mazgi -p $GITHUB_TOKEN
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_TO_PUSH_TO_PACKAGE_REGISTRY }}
     - name: Push the image
-      run: docker push docker.pkg.github.com/mazgi/docker.hugo-static-website/hugo-static-website:latest
+      run: docker push docker.pkg.github.com/mazgi/docker.hugo-static-website/hugo-static-website:${TAG-latest}
+      env:
+        TAG: ${{ github.tag }}
+      if: contains(github.ref, 'master')
