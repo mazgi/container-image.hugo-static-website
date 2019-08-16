@@ -6,8 +6,11 @@ ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get update \
   # Install packages
-  && apt-get install -y --no-install-recommends apt-utils \
-  && apt-get install -y --no-install-recommends ca-certificates openssh-client curl git jq python3-pip python3-sphinx nodejs npm \
+  && apt-get install -y --no-install-recommends apt-utils locales ca-certificates openssh-client curl git \
+  && apt-get install -y --no-install-recommends jq python3-pip python3-sphinx nodejs npm \
+  # Generate locale(s)
+  && echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen \
+  && locale-gen \
   # Upgrade pip
   && pip3 install --upgrade pip && hash -r pip3 && pip3 install setuptools \
   # Install AWS CLI
