@@ -9,3 +9,5 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       run: docker build Dockerfile.d/ --tag docker.pkg.github.com/mazgi/docker.hugo-static-website/hugo-static-website:latest
+    - name: Push the image
+      run: docker push docker.pkg.github.com/mazgi/docker.hugo-static-website/hugo-static-website:latest
