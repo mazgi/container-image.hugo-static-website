@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.source="https://github.com/mazgi/docker.hugo-stat
 # Set in non-interactive mode.
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG HUGO_VERSION=0.72.0
+ARG HUGO_VERSION=0.73.0
 ENV HUGO_VERSION=${HUGO_VERSION}
 
 RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-recommends\
