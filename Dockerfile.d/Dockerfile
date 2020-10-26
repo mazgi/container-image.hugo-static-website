@@ -34,6 +34,7 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
   && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"\
   && unzip /tmp/awscliv2.zip -d /tmp/\
   && /tmp/aws/install\
+  && rm -rf /tmp/awscliv2.zip /tmp/aws/\
   # 
   # Install Google Cloud SDK
   && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -\
@@ -54,7 +55,12 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
   && rm -f hugo_extended_${HUGO_VERSION}_Linux-64bit.deb\
   #
   # Place empty .zshrc
-  && touch /etc/skel/.zshrc
+  && touch /etc/skel/.zshrc\
+  # 
+  # Clean up\
+  && apt-get autoremove -y\
+  && apt-get clean -y\
+  && rm -rf /var/lib/apt/lists/*
 
 # Reset DEBIAN_FRONTEND to default(`dialog`).
 # If you no need `dialog`, you can set `DEBIAN_FRONTEND=readline`.
