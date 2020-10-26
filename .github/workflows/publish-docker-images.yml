@@ -1,0 +1,28 @@
+name: publish-docker-images
+# See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestpaths
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - hugo-*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: store the tag name if the event trigger is a tag
+        run: echo TAG=${GITHUB_REF#refs/*/} >> $GITHUB_ENV
+        if: contains(github.ref, 'refs/tags/')
+      - name: store the target image name
+        run: echo TARGET_IMAGE=ghcr.io/${{ github.repository_owner }}/${GITHUB_REPOSITORY#*/docker.} >> $GITHUB_ENV
+      - name: login to ghcr.io
+        run: echo ${{ secrets.TOKEN_TO_PUSH_GHCR }} | docker login ghcr.io --username ${{ github.repository_owner }} --password-stdin
+      - name: build and push the docker image
+        run: |
+          TAG=${TAG:-latest}
+          echo "TARGET_IMAGE=$TARGET_IMAGE" >> $GITHUB_ENV
+          docker build --tag $TARGET_IMAGE Dockerfile.d/
+          docker tag $TARGET_IMAGE $TARGET_IMAGE:$TAG
+          docker push $TARGET_IMAGE:$TAG
