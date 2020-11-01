@@ -23,6 +23,6 @@ jobs:
         run: |
           TAG=${TAG:-latest}
           echo "TARGET_IMAGE=$TARGET_IMAGE" >> $GITHUB_ENV
-          docker build --tag $TARGET_IMAGE Dockerfile.d/
+          docker build --tag $TARGET_IMAGE Dockerfile.d/hugo-static-website/
           docker tag $TARGET_IMAGE $TARGET_IMAGE:$TAG
           docker push $TARGET_IMAGE:$TAG
