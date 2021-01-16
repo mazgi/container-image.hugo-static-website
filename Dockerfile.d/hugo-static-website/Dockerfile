@@ -20,6 +20,7 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
   && apt-get install --assume-yes sudo apt-utils curl dnsutils git jq openssh-client tmux unzip zsh\
   && apt-get install --assume-yes apt-transport-https ca-certificates gnupg gnupg2 rsync software-properties-common\
   && apt-get install --assume-yes python3-pip python3-setuptools\
+  && apt-get install --assume-yes nodejs npm\
   # 
   # Install Docker CLI
   && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -\
@@ -35,6 +36,9 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
   && unzip /tmp/awscliv2.zip -d /tmp/\
   && /tmp/aws/install\
   && rm -rf /tmp/awscliv2.zip /tmp/aws/\
+  #
+  # Install Firebase CLI
+  && npm install -g firebase-tools\
   # 
   # Install Google Cloud SDK
   && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -\
