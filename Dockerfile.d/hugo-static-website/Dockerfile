@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.source="https://github.com/mazgi/docker.hugo-stat
 # Set in non-interactive mode.
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG HUGO_VERSION=0.83.1
+ARG HUGO_VERSION=0.81.0
 ENV HUGO_VERSION=${HUGO_VERSION}
 
 RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-recommends\
@@ -21,6 +21,9 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
   && apt-get install --assume-yes apt-transport-https ca-certificates gnupg gnupg2 rsync software-properties-common\
   && apt-get install --assume-yes python3-pip python3-setuptools\
   && apt-get install --assume-yes nodejs npm\
+  # for `pip3 install cryptography`
+  # see: https://cryptography.io/en/latest/installation/#debian-ubuntu
+  && apt-get install --assume-yes build-essential cargo libssl-dev libffi-dev python3-dev\
   # 
   # Install Docker CLI
   && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -\
