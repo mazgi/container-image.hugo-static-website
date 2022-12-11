@@ -6,12 +6,15 @@ on:
       - main
     tags:
       - hugo-*
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
       - name: store the tag name if the event trigger is a tag
         run: echo TAG=${GITHUB_REF#refs/*/} >> $GITHUB_ENV
         if: contains(github.ref, 'refs/tags/')
@@ -23,6 +26,6 @@ jobs:
         run: |
           TAG=${TAG:-latest}
           echo "TARGET_IMAGE=$TARGET_IMAGE" >> $GITHUB_ENV
-          docker build --tag $TARGET_IMAGE Dockerfile.d/hugo-static-website/
+          docker buildx build --platform linux/amd64,linux/arm64 --tag $TARGET_IMAGE Dockerfile.d/hugo-static-website/
           docker tag $TARGET_IMAGE $TARGET_IMAGE:$TAG
           docker push $TARGET_IMAGE:$TAG
