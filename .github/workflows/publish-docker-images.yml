@@ -8,6 +8,9 @@ on:
       - hugo-*
   workflow_dispatch:
 
+env:
+  DOCKER_BUILDKIT: 1
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,17 +18,12 @@ jobs:
       - uses: actions/checkout@v3
       - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
-      - name: store the tag name if the event trigger is a tag
-        run: echo TAG=${GITHUB_REF#refs/*/} >> $GITHUB_ENV
-        if: contains(github.ref, 'refs/tags/')
-      - name: store the target image name
-        run: echo TARGET_IMAGE=ghcr.io/${{ github.repository_owner }}/${GITHUB_REPOSITORY#*/docker.} >> $GITHUB_ENV
-      - name: login to ghcr.io
-        run: echo ${{ secrets.TOKEN_TO_PUSH_GHCR }} | docker login ghcr.io --username ${{ github.repository_owner }} --password-stdin
-      - name: build and push the docker image
+      #
+      # Build image
+      - name: Build the image
+        # timeout-minutes: 16
         run: |
-          TAG=${TAG:-latest}
-          echo "TARGET_IMAGE=$TARGET_IMAGE" >> $GITHUB_ENV
-          docker buildx build --platform linux/amd64,linux/arm64 --tag $TARGET_IMAGE Dockerfile.d/hugo-static-website/
-          docker tag $TARGET_IMAGE $TARGET_IMAGE:$TAG
-          docker push $TARGET_IMAGE:$TAG
+          docker buildx build\
+           --platform linux/amd64,linux/arm64\
+           --tag=local.local/no-name/hugo-static-website:HEAD\
+           Dockerfile.d/hugo-static-website/
