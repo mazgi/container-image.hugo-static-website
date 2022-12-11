@@ -2,10 +2,6 @@ name: publish-docker-images
 # See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestpaths
 on:
   push:
-    branches:
-      - main
-    tags:
-      - hugo-*
   workflow_dispatch:
 
 env:
@@ -21,9 +17,19 @@ jobs:
       #
       # Build image
       - name: Build the image
-        # timeout-minutes: 16
+        timeout-minutes: 60
         run: |
           docker buildx build\
            --platform linux/amd64,linux/arm64\
            --tag=local.local/no-name/hugo-static-website:HEAD\
            Dockerfile.d/hugo-static-website/
+      #
+      # Generate the tag
+      - name: Generate the docker tag suffix using the git tag
+        if: startsWith(github.ref, 'refs/tags/hugo-')
+        run: |
+          echo TAG_SUFFIX="${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Generate the docker tag suffix using the current date
+        if: ${{ !startsWith(github.ref, 'refs/tags/hugo-') }}
+        run: |
+          echo TAG_SUFFIX="$(date +%Y%m-)${GITHUB_SHA::7}" >> $GITHUB_ENV
