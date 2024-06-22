@@ -58,8 +58,9 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
 # RUN :\
   && : Install Packages from Added Repositories\
   && apt-get update\
-  # # Azure
-  # && apt-get install --assume-yes azure-cli powershell\
+  # Azure
+  && apt-get install --assume-yes azure-cli\
+  # && apt-get install --assume-yes powershell\
   # && pwsh -c 'Install-Module -AllowClobber -Force -Name Az'\
   # Docker
   && apt-get install --assume-yes docker-ce docker-ce-cli containerd.io docker-compose-plugin\
