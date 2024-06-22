@@ -10,11 +10,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
     steps:
       - name: Install pkgs
         timeout-minutes: 1
@@ -33,7 +28,7 @@ jobs:
           docker buildx build\
            --build-arg=HUGO_VERSION="${${GITHUB_REF#refs/*/hugo-}%-*}"\
            --load\
-           --platform=${{ matrix.platform }}\
+           --platform=linux/amd64,linux/arm64\
            --tag=local.local/no-name/hugo-static-website:HEAD\
            Dockerfile.d/hugo-static-website/
       - name: Build the image - ${{ matrix.platform }}
@@ -43,7 +38,7 @@ jobs:
         run: |
           docker buildx build\
            --load\
-           --platform=${{ matrix.platform }}\
+           --platform=linux/amd64,linux/arm64\
            --tag=local.local/no-name/hugo-static-website:HEAD\
            Dockerfile.d/hugo-static-website/
       #
