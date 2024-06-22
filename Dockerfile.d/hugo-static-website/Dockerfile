@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 LABEL org.opencontainers.image.source="https://github.com/mazgi/docker.hugo-static-website"
 
@@ -25,9 +25,6 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
   && apt-get install --assume-yes apt-transport-https ca-certificates gnupg gnupg2 rsync software-properties-common\
   && apt-get install --assume-yes python3-pip python3-setuptools\
   && apt-get install --assume-yes nodejs npm\
-  # for `pip3 install cryptography`
-  # see: https://cryptography.io/en/latest/installation/#debian-ubuntu
-  && apt-get install --assume-yes build-essential cargo libssl-dev libffi-dev python3-dev\
 #   && :
 # RUN :\
   && : APT Repository [Docker]\
@@ -68,8 +65,6 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
   && apt-get install --assume-yes docker-ce docker-ce-cli containerd.io docker-compose-plugin\
   # Google Cloud
   && apt-get install --assume-yes google-cloud-sdk\
-  # for `gsutil signurl`
-  && pip3 install pyopenssl\
 #   && :
 # RUN :\
   && : Install AWS CLI v2 for ${TARGETARCH}\
