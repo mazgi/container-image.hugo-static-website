@@ -48,7 +48,6 @@ jobs:
         run: |
           docker buildx build\
            --build-arg=HUGO_VERSION="${${GITHUB_REF#refs/*/hugo-}%-*}"\
-           --load\
            --platform=linux/amd64,linux/arm64\
            --push\
            --tag=${REGISTRY_PREFIX}/hugo-static-website:${TAG_SUFFIX}\
@@ -59,7 +58,6 @@ jobs:
         shell: zsh {0}
         run: |
           docker buildx build\
-           --load\
            --platform=linux/amd64,linux/arm64\
            --push\
            --tag=${REGISTRY_PREFIX}/hugo-static-website:latest\
