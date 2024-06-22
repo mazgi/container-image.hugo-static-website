@@ -31,7 +31,6 @@ jobs:
         shell: zsh {0}
         run: |
           docker buildx build\
-           --build-arg=HUGO_VERSION="${GITHUB_REF#refs/tags/hugo-}"\
            --build-arg=HUGO_VERSION="${${GITHUB_REF#refs/*/hugo-}%-*}"\
            --load\
            --platform=${{ matrix.platform }}\
@@ -64,7 +63,7 @@ jobs:
           echo REGISTRY_PREFIX="ghcr.io/${{ github.repository_owner }}" >> $GITHUB_ENV
       - name: Login to ghcr.io
         run: |
-          echo ${{ secrets.TOKEN_TO_PUSH_GHCR }}\
+          echo ${{ secrets.GITHUB_TOKEN }}\
            | docker login ghcr.io --username ${{ github.repository_owner }} --password-stdin
       #
       # Push the image to the registry
