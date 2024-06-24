@@ -53,7 +53,6 @@ jobs:
           tags: ${{ env.REGISTRY_PREFIX }}/hugo-static-website:latest
       - name: Build and push the image if the git-refs starts with a version tag
         if: ${{ !startsWith(github.ref, 'refs/tags/hugo-') }}
-        if: startsWith(github.ref, 'refs/tags/v')
         timeout-minutes: 60
         uses: docker/build-push-action@v6
         with:
