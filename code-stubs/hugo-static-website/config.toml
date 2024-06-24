@@ -1,0 +1,11 @@
+baseURL = "https://example.com/"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
+enableEmoji = true
+enableGitInfo = true
+enableRobotsTXT = true
+hasCJKLanguage = true
+languageCode = "en-us"
+pygmentsCodeFences = true
+pygmentsStyle = "friendly"
+title = "hugo-static-website"
