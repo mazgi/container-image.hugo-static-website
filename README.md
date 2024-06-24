@@ -1,6 +1,6 @@
 # docker.hugo-static-website
 
-![publish-docker-images](https://github.com/mazgi/docker.hugo-static-website/workflows/publish-docker-images/badge.svg)
+![publish-container-images](https://github.com/mazgi/docker.hugo-static-website/workflows/publish-container-images/badge.svg)
 
 ```shellsession
 export HUGO_VERSION=0.72.0
