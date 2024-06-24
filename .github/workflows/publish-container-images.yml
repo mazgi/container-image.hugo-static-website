@@ -42,24 +42,17 @@ jobs:
       #   - https://docs.docker.com/reference/cli/docker/buildx/build/#output
       #   - https://docs.docker.com/reference/cli/docker/buildx/build/#platform
       #   - https://docs.docker.com/build/ci/github-actions/multi-platform/#distribute-build-across-multiple-runners
-      - name: Build and push the image if the git-refs is the default(main) branch
-        if: github.ref == 'refs/heads/main'
+      - name: Build and push the image if git-refs is the default(main) branch or starts with a version tag
+        if: ${{ github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/hugo-') }}
         timeout-minutes: 60
         uses: docker/build-push-action@v6
         with:
           context: Dockerfile.d/hugo-static-website/
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.REGISTRY_PREFIX }}/hugo-static-website:latest
-      - name: Build and push the image if the git-refs starts with a version tag
-        if: ${{ !startsWith(github.ref, 'refs/tags/hugo-') }}
-        timeout-minutes: 60
-        uses: docker/build-push-action@v6
-        with:
-          context: Dockerfile.d/hugo-static-website/
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ env.REGISTRY_PREFIX }}/hugo-static-website:${{ env.TAG_SUFFIX }}
+          tags:
+            - ${{ env.REGISTRY_PREFIX }}/hugo-static-website:latest
+            - ${{ env.REGISTRY_PREFIX }}/hugo-static-website:${{ env.TAG_SUFFIX }}
       - name: If the git-refs isn't the default branch or doesn't start with a version tag, just build only the image
         if: ${{ github.ref != 'refs/heads/main' && !startsWith(github.ref, 'refs/tags/hugo-') }}
         timeout-minutes: 60
