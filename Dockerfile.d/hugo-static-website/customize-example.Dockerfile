@@ -7,6 +7,11 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 ARG GID=0
 ARG UID=0
+ARG HEALTHCHECK_URL="http://127.0.0.1:1313/"
+ENV HEALTHCHECK_URL=${HEALTHCHECK_URL}
+
+HEALTHCHECK --interval=2s --timeout=1s --start-period=4s --retries=2\
+ CMD curl --fail --output /dev/null --silent ${HEALTHCHECK_URL}
 
 RUN :\
   # Create a user for development who has the same UID and GID as you.
