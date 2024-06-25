@@ -1,7 +1,7 @@
-# docker.hugo-static-website
+# container-image.hugo-static-website
 
-[![publish-container-images](https://github.com/mazgi/docker.hugo-static-website/actions/workflows/publish-container-images.yml/badge.svg)](https://github.com/mazgi/docker.hugo-static-website/actions/workflows/publish-container-images.yml)
-[![start-stop-containers](https://github.com/mazgi/docker.hugo-static-website/actions/workflows/start-stop-containers.yml/badge.svg)](https://github.com/mazgi/docker.hugo-static-website/actions/workflows/start-stop-containers.yml)
+[![publish-container-images](https://github.com/mazgi/container-image.hugo-static-website/actions/workflows/publish-container-images.yml/badge.svg)](https://github.com/mazgi/container-image.hugo-static-website/actions/workflows/publish-container-images.yml)
+[![start-stop-containers](https://github.com/mazgi/container-image.hugo-static-website/actions/workflows/start-stop-containers.yml/badge.svg)](https://github.com/mazgi/container-image.hugo-static-website/actions/workflows/start-stop-containers.yml)
 
 ## How to Use
 

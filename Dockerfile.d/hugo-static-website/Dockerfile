@@ -1,6 +1,6 @@
 FROM ubuntu:24.04
 
-LABEL org.opencontainers.image.source="https://github.com/mazgi/docker.hugo-static-website"
+LABEL org.opencontainers.image.source="https://github.com/mazgi/container-image.hugo-static-website"
 
 # https://docs.docker.com/engine/reference/builder/#automatic-platform-args-in-the-global-scope
 ARG TARGETARCH
