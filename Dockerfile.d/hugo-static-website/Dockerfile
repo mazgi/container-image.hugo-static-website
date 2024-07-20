@@ -27,6 +27,14 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
   && apt-get install --assume-yes nodejs npm\
 #   && :
 # RUN :\
+  && : Install development NPM packages\
+  && npm install --global\
+  npm-check-updates\
+  pnpm\
+  sort-package-json\
+  && npm cache clean -force\
+#   && :
+# RUN :\
   && : APT Repository [Docker]\
   # See https://docs.docker.com/engine/install/ubuntu/
   && curl --fail --silent --show-error --location https://download.docker.com/linux/ubuntu/gpg\
