@@ -6,9 +6,9 @@ on:
 
 jobs:
   build-and-push-the-image:
-    # env:
-    #   REGISTRY_PREFIX: null
-    #   TAG_SUFFIX: null
+    env:
+      REGISTRY_PREFIX: null
+      TAG_SUFFIX: null
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
