@@ -31,6 +31,7 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
   && npm install --global\
   npm-check-updates\
   pnpm\
+  sass\
   sort-package-json\
   && npm cache clean -force\
 #   && :
