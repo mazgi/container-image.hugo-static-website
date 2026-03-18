@@ -17,9 +17,14 @@ The Dockerfile is located at [Dockerfile.d/hugo-static-website/Dockerfile](Docke
 ## Tag Naming Convention
 
 ```
-hugo-{HUGO_VERSION}-{YYYY}.{M}.0
+hugo-{HUGO_VERSION}-{YYYY}.{M}.{PATCH}
 ```
 
+- `{HUGO_VERSION}` is the Hugo version
+- `{YYYY}.{M}` is the release year and month
+- `{PATCH}` starts at `0` and is incremented when other changes (e.g., base image updates, package changes, Node.js version bumps) are made without changing the Hugo version
+
 Examples:
-- `hugo-0.131.0-2026.3.0`
+- `hugo-0.158.0-2026.3.0` — initial release with Hugo 0.158.0
+- `hugo-0.158.0-2026.3.1` — same Hugo version, other changes (e.g., Node.js update)
 - `hugo-0.129.0-2024.07.0`
