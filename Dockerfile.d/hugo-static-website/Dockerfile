@@ -8,7 +8,7 @@ ARG TARGETPLATFORM
 # Set in non-interactive mode.
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG HUGO_VERSION=0.142.0
+ARG HUGO_VERSION=0.143.1
 
 RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-recommends\
   && apt-get update\
