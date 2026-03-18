@@ -24,7 +24,8 @@ RUN echo 'apt::install-recommends "false";' > /etc/apt/apt.conf.d/no-install-rec
   && apt-get install --assume-yes sudo apt-utils curl dnsutils git jq openssh-client tmux unzip zsh\
   && apt-get install --assume-yes apt-transport-https ca-certificates gnupg gnupg2 rsync software-properties-common\
   && apt-get install --assume-yes python3-pip python3-setuptools\
-  && apt-get install --assume-yes nodejs npm\
+  && curl -fsSL https://deb.nodesource.com/setup_24.x | bash -\
+  && apt-get install --assume-yes nodejs\
 #   && :
 # RUN :\
   && : Install development NPM packages\
