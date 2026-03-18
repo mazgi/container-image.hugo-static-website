@@ -11,7 +11,7 @@ jobs:
       TAG_SUFFIX: null
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       #
       # Generate the docker tag prefix with the registry - ghcr.io
       - name: Generate tag prefix for ghcr.io
@@ -30,11 +30,11 @@ jobs:
       #
       # Set up the Docker build environment
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
       - name: Login to ghcr.io
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
@@ -48,7 +48,7 @@ jobs:
       - name: Build and push the image if git-refs is the default(main) branch or starts with a version tag
         if: ${{ github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/hugo-') }}
         timeout-minutes: 60
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: Dockerfile.d/hugo-static-website/
           platforms: linux/amd64,linux/arm64
@@ -57,7 +57,7 @@ jobs:
       - name: If the git-refs isn't the default branch or doesn't start with a version tag, just build only the image
         if: ${{ github.ref != 'refs/heads/main' && !startsWith(github.ref, 'refs/tags/hugo-') }}
         timeout-minutes: 60
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: Dockerfile.d/hugo-static-website/
           platforms: linux/amd64,linux/arm64

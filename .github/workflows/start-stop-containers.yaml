@@ -15,7 +15,7 @@ jobs:
         timeout-minutes: 1
         run: |
           sudo apt-get install --assume-yes --no-install-recommends zsh
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Export UIDs as environment variables
         run: |
           echo "GID=$(id -g)" >> .env
@@ -44,7 +44,7 @@ jobs:
     steps:
       - run: |
           echo ${{ matrix.service }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Export UIDs as environment variables
         run: |
           echo "GID=$(id -g)" >> .env
